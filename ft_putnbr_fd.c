@@ -1,13 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cdupuis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 15:15:42 by cdupuis           #+#    #+#             */
+/*   Updated: 2022/11/17 15:15:45 by cdupuis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-    char res;
-    if (n > 0)
-    {
+	char	*str;
 
-        res = (n % 10) + '0';
-        ft_putnbr_fd(n / 10, fd);
-        write(fd, &res, 1);
-    }
+	str = ft_itoa(n);
+	write(fd, str, ft_strlen(str));
+	free(str);
 }

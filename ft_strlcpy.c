@@ -1,26 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cdupuis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 15:26:27 by cdupuis           #+#    #+#             */
+/*   Updated: 2022/11/17 15:26:35 by cdupuis          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <string.h>
 
-
-size_t ft_strlcpy(char * dst, const char * src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-    size_t i = 0;
-    while (i <= dstsize)
-    {
-        dst[i] = src[i];
-        i++;
-    }
-    dst[i] = '\0';
-    return i;
-}
+	size_t	i;
 
-int main ()
-{
-
-    char src[] = "coucou";
-	char dest[10]; memset(dest, 'A', 10);
-    ft_strlcpy(dest, "1", 0);
-    printf("%s\n", dest);
-    strlcpy(dest, "1", 0);
-    printf("%s\n", dest);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (src[i] && i < dstsize - 1)
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src));
 }
