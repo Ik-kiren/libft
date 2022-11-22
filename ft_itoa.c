@@ -32,8 +32,8 @@ int	getsize(int n)
 	return (i);
 }
 
-	char	*ft_itoa(int n)
-	{
+char	*ft_itoa(int n)
+{
 	int		i;
 	char	*tab;
 

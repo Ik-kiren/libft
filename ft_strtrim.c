@@ -12,6 +12,21 @@
 
 #include "libft.h"
 
+char	*searchstr(char const *s1, int j, int i, int start)
+{
+	char	*tab;
+
+	tab = malloc(sizeof(char) * j - start + 1);
+	while (start < j)
+	{
+		tab[i] = s1[start];
+		i++;
+		start++;
+	}
+	tab[i] = '\0';
+	return (tab);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	int	i;
@@ -24,23 +39,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (s1[j])
 	{
 		if (ft_strchr(set, s1[j]) == 0)
-			break;
+			break ;
 		j++;
 	}
 	start = j;
 	while (s1[j])
 	{
 		if (ft_strchr(set, s1[j]) != 0)
-			break;
+			break ;
 		j++;
 	}
-	char *tab = malloc(sizeof(char) * j - start + 1);
-	while (start < j)
-	{
-		tab[i] = s1[start];
-		i++;
-		start++;
-	}
-	tab[i] = '\0';
-	return (tab);
+	return (searchstr(s1, j, i, start));
 }

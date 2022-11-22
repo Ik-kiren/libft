@@ -12,34 +12,48 @@
 
 #include "libft.h"
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char	*len_malloc(char const *s, size_t len)
 {
-size_t i = start;
-size_t j = 0; 
-char *tab;
-size_t length = len + 1;
-if(len > ft_strlen(s))
-    length = strlen(s) + 1;
-tab  = (char *)malloc(sizeof(char) * length);
-    if (!tab) 
-    {
-        free(tab);
-        return NULL;
-    }
-    if (start > ft_strlen(s) )
-    {
-        tab[j] = '\0';
-        return tab;
-    } 
-    while (s[i])
-    {
-        if (i >= start && j < len)
-        {
-            tab[j] = s[i];
-            j++;
-        }
-        i++;
-    }
-    tab[j] = '\0';
-    return tab;
+	char	*tab;
+	size_t	length;
+
+	length = len +1;
+	if (len > ft_strlen(s))
+	length = ft_strlen(s) + 1;
+	tab = (char *)malloc(sizeof(char) * length);
+	if (!tab)
+	{
+		free(tab);
+		return (NULL);
+	}
+	return (tab);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	char	*tab;
+
+	i = start;
+	j = 0;
+	tab = len_malloc(s, len);
+	if (tab == NULL)
+		return (NULL);
+	if (start > ft_strlen(s))
+	{
+		tab[j] = '\0';
+		return (tab);
+	}
+	while (s[i])
+	{
+		if (i >= start && j < len)
+		{
+			tab[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	tab[j] = '\0';
+	return (tab);
 }
