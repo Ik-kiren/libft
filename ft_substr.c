@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdupuis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cdupuis <cdupuis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:24:06 by cdupuis           #+#    #+#             */
-/*   Updated: 2022/11/17 15:24:08 by cdupuis          ###   ########.fr       */
+/*   Updated: 2022/11/25 17:37:59 by cdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*len_malloc(char const *s, size_t len)
+static char	*len_malloc(char const *s, size_t len)
 {
 	char	*tab;
 	size_t	length;
 
-	length = len +1;
+	length = len + 1;
 	if (len > ft_strlen(s))
 	length = ft_strlen(s) + 1;
 	tab = (char *)malloc(sizeof(char) * length);

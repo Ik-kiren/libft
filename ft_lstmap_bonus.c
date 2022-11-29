@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cdupuis <cdupuis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 15:17:02 by cdupuis           #+#    #+#             */
-/*   Updated: 2022/11/25 11:41:38 by cdupuis          ###   ########.fr       */
+/*   Created: 2022/11/24 14:09:16 by cdupuis           #+#    #+#             */
+/*   Updated: 2022/11/24 14:18:09 by cdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *source)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int		i;
-	char	*str;
+	t_list	*tmp;
+	t_list	*tmp2;
 
-	i = 0;
-	str = malloc(sizeof(char) * ft_strlen(source) + 1);
-	if (!str)
+	if (!lst || !f)
 		return (NULL);
-	while (source[i] != '\0')
+	tmp2 = ft_lstnew(f(lst->content));
+	if (!tmp2)
 	{
-		str[i] = source[i];
-		i++;
+		ft_lstclear(&tmp, del);
+		return (NULL);
 	}
-	str[i] = '\0';
-	return (str);
+	tmp = tmp2;
+	lst = lst->next;
+	while (lst)
+	{
+		tmp2 = ft_lstnew(f(lst->content));
+		ft_lstadd_back(&tmp, tmp2);
+		lst = lst->next;
+	}
+	return (tmp);
 }

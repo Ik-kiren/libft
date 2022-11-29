@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdupuis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cdupuis <cdupuis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:16:30 by cdupuis           #+#    #+#             */
-/*   Updated: 2022/11/17 15:16:31 by cdupuis          ###   ########.fr       */
+/*   Updated: 2022/11/25 15:11:15 by cdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	wordcount(char const *s, char c)
+static int	wordcount(char const *s, char c)
 {
 	int	i;
 	int	count;
@@ -37,14 +37,16 @@ int	wordcount(char const *s, char c)
 	return (count);
 }
 
-char	*getstr(char const *s, int min, int max)
+static char	*getstr(char const *s, int min, int max)
 {
 	char	*str;
 	int		i;
 
 	i = 0;
 	str = malloc(sizeof(char) * ((max - min) + 1));
-	while (min <= max)
+	if (!str)
+		return (NULL);
+	while (min <= max - 1)
 	{
 		str[i] = s[min];
 		i++;
@@ -64,19 +66,19 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	str = malloc(sizeof(char *) * (wordcount(s, c) + 1));
+	if (!str)
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		lenmin = i;
 		while (s[i] == c && s[i] != '\0')
-		{
-			lenmin++;
 			i++;
-		}
+		lenmin = i;
 		if (s[i] != c && s[i] != '\0')
 		{
 			while (s[i] != c && s[i] != '\0')
 				i++;
-			str[j++] = getstr(s, lenmin, i - 1);
+			str[j++] = getstr(s, lenmin, i);
 		}
 	}
 	str[j] = NULL;

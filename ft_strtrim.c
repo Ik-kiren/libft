@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdupuis <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: cdupuis <cdupuis@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:23:29 by cdupuis           #+#    #+#             */
-/*   Updated: 2022/11/17 15:23:31 by cdupuis          ###   ########.fr       */
+/*   Updated: 2022/11/25 12:33:03 by cdupuis          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*searchstr(char const *s1, int j, int i, int start)
+static char	*searchstr(char const *s1, int j, int start)
 {
 	char	*tab;
+	int		i;
 
-	tab = malloc(sizeof(char) * j - start + 1);
+	i = 0;
+	tab = malloc(sizeof(char) * (j - start + 1));
+	if (!tab)
+		return (NULL);
 	while (start < j)
 	{
 		tab[i] = s1[start];
@@ -29,11 +33,9 @@ char	*searchstr(char const *s1, int j, int i, int start)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int	i;
 	int	j;
 	int	start;
 
-	i = 0;
 	j = 0;
 	start = 0;
 	while (s1[j])
@@ -42,12 +44,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 			break ;
 		j++;
 	}
+	if (s1[j] == '\0')
+		return (searchstr(s1, j, j));
 	start = j;
-	while (s1[j])
+	j = ft_strlen(s1);
+	while (j >= 0)
 	{
-		if (ft_strchr(set, s1[j]) != 0)
+		if (ft_strchr(set, s1[j]) == 0)
 			break ;
-		j++;
+		j--;
 	}
-	return (searchstr(s1, j, i, start));
+	return (searchstr(s1, j + 1, start));
 }
